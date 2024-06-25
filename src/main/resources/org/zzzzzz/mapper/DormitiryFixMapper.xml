@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zzzzzz.mapper.DormitiryFixMapper">
+
+    <select id="list" resultType="Fix">
+        select * from fix
+    </select>
+
+    <select id="list_count" resultType="int">
+        select count(*) from fix
+    </select>
+
+    <select id="list_page" resultType="Fix">
+        select * from fix limit #{index} , #{showdate}
+    </select>
+
+    <update id="fixed">
+        UPDATE fix SET fixed = '已完成' WHERE id = #{id};
+    </update>
+
+</mapper>

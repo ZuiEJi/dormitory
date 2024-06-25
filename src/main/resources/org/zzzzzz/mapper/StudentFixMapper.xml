@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zzzzzz.mapper.StudentFixMapper">
+
+    <select id="list" resultType="Fix">
+    select * from fix where name like concat('%',#{name},'%')
+    </select>
+
+    <select id="list_count" resultType="int">
+        select count(*) from fix where name like concat('%',#{name},'%')
+    </select>
+
+    <select id="list_page" resultType="Fix">
+        select * from fix where name like concat('%',#{name},'%') limit #{index} , #{showdate}
+    </select>
+    
+    <update id="save">
+        insert into fix values(null, #{name}, #{dormitoryname},#{describe}, #{time}, #{fixed})
+    </update>
+    
+</mapper>

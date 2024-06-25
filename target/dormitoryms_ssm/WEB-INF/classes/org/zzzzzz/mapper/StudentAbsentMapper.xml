@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zzzzzz.mapper.StudentAbsentMapper">
+
+    <!--查询当前学生所有的缺勤信息-->
+    <select id="list_all" resultType="Absent">
+        select a.id,b.name buildingName,d.name dormitoryName,s.name studentName,a.reason,da.name dormitoryAdminName,a.create_date createDate
+        from dormitory d,student s,building b,absent a,dormitory_admin da
+        where d.id = a.dormitory_id and s.id = a.student_id and b.id = a.building_id and da.id = a.dormitory_admin_id and s.name like concat('%', #{name}, '%')
+    </select>
+
+    <!--查询当前学生所有的缺勤信息-->
+    <select id="list_page" resultType="Absent">
+        select a.id,b.name buildingName,d.name dormitoryName,s.name studentName,a.reason,da.name dormitoryAdminName,a.create_date createDate
+        from dormitory d,student s,building b,absent a,dormitory_admin da
+        where d.id = a.dormitory_id and s.id = a.student_id and b.id = a.building_id and da.id = a.dormitory_admin_id
+        and s.name = #{name}
+        limit #{index} , #{showdate}
+    </select>
+
+    <!--查询当前学生缺勤总数-->
+    <select id="list_count" resultType="int">
+        select count(* )
+        from dormitory d,student s,building b,absent a,dormitory_admin da
+        where d.id = a.dormitory_id and s.id = a.student_id and b.id = a.building_id and da.id = a.dormitory_admin_id and s.name like concat('%', #{name}, '%')
+    </select>
+
+
+</mapper>
